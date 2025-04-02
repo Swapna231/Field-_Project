@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Bookstore Catalog</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+        .container {
+            width: 600px;
+            background: white;
+            margin: 50px auto;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px gray;
+        }
+        h2 {
+            background: #0056b3;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        input, button {
+            width: 100%;
+            padding: 8px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            cursor: pointer;
+        }
+        .btn-primary { background: #007bff; color: white; }
+        .btn-danger { background: #dc3545; color: white; }
+        .btn-success { background: #28a745; color: white; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+        img {
+            width: 50px;
+            height: auto;
+        }
+    </style>
+    <script>
+        function addToCart(bookName) {
+            alert(bookName + " has been added to your cart!");
+        }
+        function buyNow(bookName) {
+            alert("You have purchased " + bookName + " successfully!");
+        }
+        function logout() {
+            alert("You have been logged out!");
+            window.location.href = "index.html";
+        }
+        function addBook() {
+            let bookName = prompt("Enter book name:");
+            let author = prompt("Enter author name:");
+            let price = prompt("Enter book price:");
+            let imageUrl = prompt("Enter book cover image URL:");
+            
+            if (bookName && author && price && imageUrl) {
+                let table = document.querySelector("table");
+                let newRow = table.insertRow();
+                newRow.innerHTML = `
+                    <td><img src="${imageUrl}" alt="${bookName}"></td>
+                    <td>${bookName}</td>
+                    <td>${author}</td>
+                    <td>$${price}</td>
+                    <td>
+                        <button class="btn-success" onclick="buyNow('${bookName}')">Buy</button>
+                        <button class="btn-primary" onclick="addToCart('${bookName}')">Add to Cart</button>
+                    </td>
+                `;
+            } else {
+                alert("All fields are required to add a book.");
+            }
+        }
+    </script>
+</head>
+<body>
+    <!-- Online Bookstore Catalog -->
+    <div class="container">
+        <h2>Online Bookstore - Browse & Buy</h2>
+        <p>Welcome, bookstore@example.com</p>
+        <button class="btn-danger" style="float:right;" onclick="logout()">Logout</button>
+        <button class="btn-primary" style="float:left;" onclick="addBook()">Add Book</button>
+        <table>
+            <tr style="background: lightgreen;">
+                <th>Book Cover</th>
+                <th>Book Name</th>
+                <th>Author</th>
+                <th>Price</th>
+                <th>Actions</th>
+            </tr>
+            <tr>
+                <td><img src="https://m.media-amazon.com/images/I/41SH-SvWPxL.jpg" alt="Clean Code"></td>
+                <td>Clean Code: A Handbook of Agile Software Craftsmanship</td>
+                <td>Robert C. Martin</td>
+                <td>$29.99</td>
+                <td>
+                    <button class="btn-success" onclick="buyNow('Clean Code')">Buy</button>
+                    <button class="btn-primary" onclick="addToCart('Clean Code')">Add to Cart</button>
+                </td>
+            </tr>
+            <tr>
+                <td><img src="https://m.media-amazon.com/images/I/41as+WafrFL._SL500_.jpg" alt="The Pragmatic Programmer"></td>
+                <td>The Pragmatic Programmer</td>
+                <td>Andrew Hunt, David Thomas</td>
+                <td>$39.99</td>
+                <td>
+                    <button class="btn-success" onclick="buyNow('The Pragmatic Programmer')">Buy</button>
+                    <button class="btn-primary" onclick="addToCart('The Pragmatic Programmer')">Add to Cart</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>
